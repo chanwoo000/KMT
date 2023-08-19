@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import * as P from "../../components/Page/Page.js";
 import * as H from "../../components/Head/Head.js";
 import * as F from "../../components/Footer/Footer.js";
@@ -14,12 +14,28 @@ const options = {
 };
 
 export default function NewStore() {
-    const container = useRef(null); //지도를 담을 영역의 DOM 레퍼런스
-
+    const [location, setLocation] = useState({ lat: "", lng: "" });
+    
     useEffect(() => {
-    new window.kakao.maps.Map(container.current, options); //지도 생성 및 객체 리턴
-    return () => {};
-    }, []);
+        window.kakao.maps.load(() => {
+            const container = document.getElementById("map");
+            const map = new window.kakao.maps.Map(container, options);
+            const marker = new window.kakao.maps.Marker({ 
+                // 지도 중심좌표에 마커를 생성합니다 
+                position: map.getCenter() 
+            });
+            marker.setMap(map);
+
+          // 클릭 이벤트 리스너
+        window.kakao.maps.event.addListener(map, "click", (mouseEvent) => {
+            var latlng = mouseEvent.latLng;
+            setLocation({ lat: latlng.getLat(), lng: latlng.getLng() });
+        });
+    });
+}, []);
+    
+
+    
 
     return (
         <P.Page>
@@ -28,13 +44,22 @@ export default function NewStore() {
                 <br></br>KMT
             </H.LogoTitle>
 
-            <N.StoreName>
+            <N.StoreName1>
                 <div>식당 이름: </div>
                 <input style={{marginLeft:"10px",height:"20px"}}></input>
-            </N.StoreName>
+            </N.StoreName1>
 
-            <div className="map-container" style={{ width: "100%", height: "400px", marginTop: "30px" }} ref={container}></div>
+            <N.StoreName2>
+                <div>주소: </div>
+                <input id="addressInput" style={{marginLeft:"10px",height:"20px"} }></input>
+            </N.StoreName2>
 
+            <div id="map" style={{ width: "100%", height: "400px", marginTop: "30px" }} ></div>
+
+
+            <N.SaveButtonDiv>
+                <N.SaveButton>저장</N.SaveButton>
+            </N.SaveButtonDiv>
             <F.UnderBar style={{ zIndex: 2 }}>
                 <F.UnderBar1>
                     <F.CustomLink to='/Map'>   

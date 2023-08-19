@@ -4,8 +4,7 @@ import * as F from "../../components/Footer/Footer.js";
 import Home from '../../asset/img/Home.png';
 import Plus from '../../asset/img/+.png';
 import Information from '../../asset/img/Information.png';
-import { Link } from 'react-router-dom';
-import styled from "styled-components";
+
 
 
 const options = {
@@ -13,7 +12,6 @@ const options = {
   center: new window.kakao.maps.LatLng(37.611078, 126.995938), //지도의 중심좌표.
   level: 3, //지도의 레벨(확대, 축소 정도)
 };
-
 
 
 function Map() {

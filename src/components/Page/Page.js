@@ -5,7 +5,7 @@ export const Page = styled.div`
     top: 0;
     bottom: 0;
     width: 100%;
-    max-width: 500px;
+    max-height: 844px;
     left: 50%;
     transform: translate(-50%, 0);
     overflow: hidden;

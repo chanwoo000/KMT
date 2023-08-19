@@ -1,13 +1,7 @@
 import styled from "styled-components";
+import { Link } from 'react-router-dom';
 
 
-
-export const LogoTitle = styled.div`
-    margin-top: 25%;
-    text-align: center;
-    font-size: 50px;
-    color:#98C597;
-`
 
 export const LogoImage = styled.img`
     margin-top: 10%;
@@ -28,6 +22,12 @@ export const StartButton = styled.button`
     background-color:#98C597;
     border:none;
     color: white;
-    border-radius:10px
+    border-radius:10px;
+    cursor:pointer;
 `;
+
+export const CustomLink = styled(Link)`
+    text-decoration: none;
+`;
+
 
